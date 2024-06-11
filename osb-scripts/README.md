@@ -20,3 +20,5 @@ Using `average-test-execution-results.py` now instead of `average-run-results.py
     - Can optionally include `-l` to include latency values instead of service time. Useful if comparing service time and latency values and determining if they are identical when target-throughput is set to None.
 3. It will produce a test execution json file with average values from all runs. Provide that to the next script `python3 convert-results-to-csv.py -f <input average json file>`
 4. This will produce a CSV that you can paste into quip
+
+Note: Arithmetic means should be calcualted for the same types. Geometric means should be calculated when combining values from different types.
