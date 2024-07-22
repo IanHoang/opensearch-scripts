@@ -11,10 +11,13 @@ def sort_and_create_new_table(filename, output):
     df['operation'] = pd.Categorical(df['operation'], categories=desired_order, ordered=True)
     df = df.sort_values(['operation', 'distribution_version'])
 
-    pivoted = df.pivot_table(index='operation', columns='distribution_version', values='p90_value', aggfunc='mean')
+    pivoted = df.pivot_table(index='operation', observed=False, columns='distribution_version', values='p90_value', aggfunc='mean')
+
     pivoted = pivoted.fillna(0)
 
     pivoted.to_csv(f"{output}.csv")
+
+    print("Finished sorting operations and creating new CSV")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(prog="Sort CSV OSB Test Executions from Quicksight", description="A tool to sort and convert OSB CSV results exported from Quicksight")
