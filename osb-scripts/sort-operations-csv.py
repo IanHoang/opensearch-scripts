@@ -22,9 +22,9 @@ def sort_and_create_new_table(filename, output, show_rsd):
             version = col.split('_')[0]
             mean_col = col
             std_col = f'{version}_std'
-            pivoted[f'{version} Relative STD'] = (pivoted[std_col] / pivoted[mean_col]).round(2)
+            pivoted[f'{version} Relative STD (%)'] = ((pivoted[std_col] / pivoted[mean_col]) * 100).round(2)
 
-        pivoted = pivoted.drop([col for col in pivoted.columns if col.endswith('_std') and not col.endswith('Relative STD')], axis=1)
+        pivoted = pivoted.drop([col for col in pivoted.columns if col.endswith('_std') and not col.endswith('Relative STD (%)')], axis=1)
     if not show_rsd:
         pivoted = pivoted.drop([col for col in pivoted.columns if col.endswith('_std')], axis=1)
 
