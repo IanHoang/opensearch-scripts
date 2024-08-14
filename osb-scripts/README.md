@@ -22,3 +22,8 @@ Using `average-test-execution-results.py` now instead of `average-run-results.py
 4. This will produce a CSV that you can paste into quip
 
 Note: Arithmetic means should be calcualted for the same types. Geometric means should be calculated when combining values from different types.
+
+### Convert Results from Quicksight CSV
+1. Export results from Quicksight
+2. Run `python3 sort-operations-csv.py -f ~/Downloads/216-all-operations.csv -o 216-operations -r`
+3. Add results to analysis spreadsheet
