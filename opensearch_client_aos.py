@@ -48,7 +48,7 @@ def create_client(host, port, user_auth):
 
 if __name__ == "__main__":
     load_dotenv()
-    host = os.getenv('TARGET_HOST')
+    host = os.getenv('TARGET_HOST') # Omit the https://
     port = 443
     username = os.getenv('USERNAME')
     password = os.getenv('PASSWORD')
