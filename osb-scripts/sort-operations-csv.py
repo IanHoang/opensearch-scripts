@@ -3,7 +3,24 @@ import argparse
 import pandas as pd
 
 # Define the desired order of operation names
-desired_order = ['default', 'scroll', 'query-string-on-message', 'query-string-on-message-filtered', 'query-string-on-message-filtered-sorted-num', 'term', 'desc_sort_timestamp', 'asc_sort_timestamp', 'desc_sort_with_after_timestamp', 'asc_sort_with_after_timestamp', 'desc_sort_timestamp_can_match_shortcut', 'desc_sort_timestamp_no_can_match_shortcut', 'asc_sort_timestamp_can_match_shortcut', 'asc_sort_timestamp_no_can_match_shortcut', 'sort_keyword_can_match_shortcut', 'sort_keyword_no_can_match_shortcut', 'sort_numeric_desc', 'sort_numeric_asc', 'sort_numeric_desc_with_match', 'sort_numeric_asc_with_match', 'multi_terms-keyword', 'keyword-terms', 'keyword-terms-low-cardinality', 'composite-terms', 'composite_terms-keyword', 'range', 'range-numeric', 'keyword-in-range', 'range_field_conjunction_big_range_big_term_query', 'range_field_disjunction_big_range_small_term_query', 'range_field_conjunction_small_range_small_term_query', 'range_field_conjunction_small_range_big_term_query', 'date_histogram_hourly_agg', 'date_histogram_minute_agg', 'composite-date_histogram-daily', 'range-auto-date-histo', 'range-auto-date-histo-with-metrics']
+# Original Desired Order
+#desired_order = ['default', 'scroll', 'query-string-on-message', 'query-string-on-message-filtered', 'query-string-on-message-filtered-sorted-num', 'term', 'desc_sort_timestamp', 'asc_sort_timestamp', 'desc_sort_with_after_timestamp', 'asc_sort_with_after_timestamp', 'desc_sort_timestamp_can_match_shortcut', 'desc_sort_timestamp_no_can_match_shortcut', 'asc_sort_timestamp_can_match_shortcut', 'asc_sort_timestamp_no_can_match_shortcut', 'sort_keyword_can_match_shortcut', 'sort_keyword_no_can_match_shortcut', 'sort_numeric_desc', 'sort_numeric_asc', 'sort_numeric_desc_with_match', 'sort_numeric_asc_with_match', 'multi_terms-keyword', 'keyword-terms', 'keyword-terms-low-cardinality', 'composite-terms', 'composite_terms-keyword', 'range', 'range-numeric', 'keyword-in-range', 'range_field_conjunction_big_range_big_term_query', 'range_field_disjunction_big_range_small_term_query', 'range_field_conjunction_small_range_small_term_query', 'range_field_conjunction_small_range_big_term_query', 'date_histogram_hourly_agg', 'date_histogram_minute_agg', 'composite-date_histogram-daily', 'range-auto-date-histo', 'range-auto-date-histo-with-metrics']
+# New Desired Order
+text_querying = ['query-string-on-message','query-string-on-message-filtered','query-string-on-message-filtered-sorted-num','term']
+term_aggs = ['cardinality-agg-high', 'cardinality-agg-low', 'composite_terms-keyword', 'composite-terms', 'keyword-terms',
+          'keyword-terms-low-cardinality', 'multi_terms-keyword', 'keyword-terms-low-cardinality-min', 'keyword-terms-min',
+          'keyword-terms-numeric-terms', 'numeric-terms-numeric-terms']
+sorting = ['asc_sort_timestamp', 'asc_sort_timestamp_can_match_shortcut', 'asc_sort_timestamp_no_can_match_shortcut', 'asc_sort_with_after_timestamp', 'desc_sort_timestamp',
+          'desc_sort_timestamp_can_match_shortcut', 'desc_sort_timestamp_no_can_match_shortcut', 'desc_sort_with_after_timestamp', 'sort_keyword_can_match_shortcut', 'sort_keyword_no_can_match_shortcut',
+          'sort_numeric_asc', 'sort_numeric_asc_with_match', 'sort_numeric_desc', 'sort_numeric_desc_with_match']
+range_queries = ['keyword-in-range', 'range', 'range_field_conjunction_big_range_big_term_query', 'range_field_conjunction_small_range_big_term_query',
+          'range_field_conjunction_small_range_small_term_query', 'range_field_disjunction_big_range_small_term_query', 'range-agg-1', 'range-agg-2',
+          'range-numeric', 'range-aggregation', 'range-date-histo', 'range-date-histo-with-metrics', 'range-numeric-significant-terms']
+date_histogram = ['composite-date_histogram-daily', 'date_histogram_hourly_agg', 'date_histogram_minute_agg', 'range-auto-date-histo', 'range-auto-date-histo-with-metrics', 'date-histo-numeric-terms']
+date_histogram_additional = ['date-histo-entire-range', 'date-histo-geohash-grid', 'date-histo-geotile-grid', 'date-histo-histo', 'date-histo-string-significant-terms-via-default-strategy', 'date-histo-string-significant-terms-via-global-ords', 'date-histo-string-significant-terms-via-map', 'date-histo-string-terms-via-default-strategy', 'date-histo-string-terms-via-global-ords', 'date-histo-string-terms-via-map', 'range-auto-date-histo-with-time-zone']
+
+desired_order = text_querying + sorting + term_aggs + range_queries + date_histogram + date_histogram_additional
+print(desired_order)
 
 def sort_and_create_new_table(filename, output, show_rsd):
     df = pd.read_csv(filename)
